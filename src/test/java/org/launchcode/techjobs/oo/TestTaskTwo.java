@@ -91,7 +91,7 @@ public class TestTaskTwo extends AbstractTest {
     }
 
     @Test
-    public void testPositionTypeToStringMethod()  {
+    public void testPositionTypeToStringMethod() {
         String aValue = "a position type";
         PositionType positionType = new PositionType(aValue);
         assertEquals(aValue, positionType.toString());

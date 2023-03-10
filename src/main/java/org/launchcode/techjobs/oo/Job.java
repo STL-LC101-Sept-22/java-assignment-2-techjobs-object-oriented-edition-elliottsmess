@@ -13,9 +13,9 @@ public class Job {
     private PositionType positionType;
     private CoreCompetency coreCompetency;
 
-    public Job () {
+    public Job() {
         this.id = nextId;
-        nextId ++;
+        nextId++;
     }
 
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
@@ -30,7 +30,7 @@ public class Job {
 
     @Override
     public boolean equals(Object toBeCompared) {
-        if(toBeCompared == null) {
+        if (toBeCompared == null) {
             return false;
         }
         if (toBeCompared.getClass() != getClass()) {
@@ -39,29 +39,32 @@ public class Job {
         Job theJob = (Job) toBeCompared;
         return theJob.id == id;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder outputString = new StringBuilder();
         outputString.append("\n");
-        if(Objects.isNull(getName()) && Objects.isNull(getEmployer()) && Objects.isNull(getLocation()) && Objects.isNull(getPositionType()) && Objects.isNull(getCoreCompetency())) {
+        if (Objects.isNull(getName()) && Objects.isNull(getEmployer()) && Objects.isNull(getLocation()) && Objects.isNull(getPositionType()) && Objects.isNull(getCoreCompetency())) {
             outputString.append("OOPS! This job does not seem to exist.\n");
             return outputString.toString();
         }
         Integer idInt = getId();
         outputString.append(printFormattedLine("ID", idInt));
         outputString.append(printFormattedLine("Name", getName()));
-        outputString.append(printFormattedLine("Employer",getEmployer()));
+        outputString.append(printFormattedLine("Employer", getEmployer()));
         outputString.append(printFormattedLine("Location", getLocation()));
         outputString.append(printFormattedLine("Position Type", getPositionType()));
-        outputString.append(printFormattedLine("Core Competency",getCoreCompetency()));
+        outputString.append(printFormattedLine("Core Competency", getCoreCompetency()));
         return outputString.toString();
     }
+
     public String printFormattedLine(String label, Object obj) {
-        if(Objects.isNull(obj) || obj.toString() == "") {
+        if (Objects.isNull(obj) || obj.toString() == "") {
             return label + ": Data not available\n";
         }
-        return label +": " + obj.toString() + "\n";
+        return label + ": " + obj.toString() + "\n";
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(id);
@@ -110,5 +113,5 @@ public class Job {
     public void setCoreCompetency(CoreCompetency coreCompetency) {
         this.coreCompetency = coreCompetency;
     }
-}
 
+}
