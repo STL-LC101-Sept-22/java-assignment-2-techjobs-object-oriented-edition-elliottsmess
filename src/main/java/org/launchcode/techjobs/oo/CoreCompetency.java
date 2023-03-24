@@ -3,20 +3,27 @@ package org.launchcode.techjobs.oo;
 import java.util.Objects;
 
 public class CoreCompetency extends JobField {
-
-
-    private int id;
     private static int nextId = 1;
+    private int id;
     private String value;
 
     public CoreCompetency() {
-        this.id = nextId;
+        id = nextId;
         nextId++;
     }
 
     public CoreCompetency(String value) {
         this();
         this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    // The 'id' field should not have a setter, only a getter.
+    public int getId() {
+        return id;
     }
 
     // Custom toString, equals, and hashCode methods:
@@ -38,8 +45,11 @@ public class CoreCompetency extends JobField {
     public int hashCode() {
         return Objects.hash(id);
     }
+}
 
-    // TODO: Use the "Generate" tool to add a getter and setter for the 'value' field but
+
+// TODO: Use the "Generate" tool to add a getter and setter for the 'value' field but
     //  ONLY a getter for the 'id' field.
 
-}
+
+

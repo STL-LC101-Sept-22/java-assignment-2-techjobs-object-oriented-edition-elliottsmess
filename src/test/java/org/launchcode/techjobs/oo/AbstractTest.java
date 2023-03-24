@@ -18,23 +18,38 @@ public class AbstractTest {
         return constructor.newInstance(value);
     }
 
-    public Job createJob(String name, String employer, String location, String positionType, String coreCompetency) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Class jobClass = getClassByName("Job");
-        Constructor jobConstructor = jobClass.getConstructor(
-                String.class,
-                Employer.class,
-                Location.class,
-                PositionType.class,
-                CoreCompetency.class
-        );
+//
+public Job createJob(String name, String employerName, String locationName, String positionTypeName, String coreCompetencyName) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    Class<?> jobClass = getClassByName("Job");
+    Class<?> employerClass = getClassByName("Employer");
+    Class<?> locationClass = getClassByName("Location");
+    Class<?> positionTypeClass = getClassByName("PositionType");
+    Class<?> coreCompetencyClass = getClassByName("CoreCompetency");
 
-        return (Job) jobConstructor.newInstance(
-                name,
-                initializeJobField(Employer.class, employer),
-                initializeJobField(Location.class, location),
-                initializeJobField(PositionType.class, positionType),
-                initializeJobField(CoreCompetency.class, coreCompetency));
-    }
+    Constructor<?> employerConstructor = employerClass.getConstructor(String.class);
+    Constructor<?> locationConstructor = locationClass.getConstructor(String.class);
+    Constructor<?> positionTypeConstructor = positionTypeClass.getConstructor(String.class);
+    Constructor<?> coreCompetencyConstructor = coreCompetencyClass.getConstructor(String.class);
+
+    Object employer = employerConstructor.newInstance(employerName);
+    Object location = locationConstructor.newInstance(locationName);
+    Object positionType = positionTypeConstructor.newInstance(positionTypeName);
+    Object coreCompetency = coreCompetencyConstructor.newInstance(coreCompetencyName);
+
+    Constructor<?> jobConstructor = jobClass.getConstructor(String.class, employerClass, locationClass, positionTypeClass, coreCompetencyClass);
+
+    return (Job) jobConstructor.newInstance(name, employer, location, positionType, coreCompetency);
+}
+
+
+
+//        return (Job) jobConstructor.newInstance(
+//                name,
+//                initializeJobField(Employer.class, employer),
+//                initializeJobField(Location.class, location),
+//                initializeJobField(PositionType.class, positionType),
+//                initializeJobField(CoreCompetency.class, coreCompetency));
+
 
     protected String getJobFieldString(Job job, String fieldName, Boolean substituteEmpty) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, ClassNotFoundException {
         String className = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
