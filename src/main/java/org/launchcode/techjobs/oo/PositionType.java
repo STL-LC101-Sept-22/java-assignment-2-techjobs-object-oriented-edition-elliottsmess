@@ -1,6 +1,6 @@
 package org.launchcode.techjobs.oo;
 
-public class PositionType {
+public class PositionType extends JobField {
 
     private int id;
     private static int nextId = 1;
@@ -17,6 +17,11 @@ public class PositionType {
     }
 
     // TODO: Add a custom toString() method that returns the data stored in 'value'.
+
+    @Override
+    public String toString() {
+        return value;
+    }
 
     // TODO: Add custom equals and hashCode methods. Consider two PositionType objects "equal" when
     //  their id fields match.
